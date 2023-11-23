@@ -1,0 +1,29 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `usp_book_appts_add_or_edit`(
+IN _AppointmentID INT,
+IN _AppointmentTicketNo VARCHAR(255),
+IN _FullName VARCHAR(45),
+IN _PhoneNo INT,
+IN _Doctor VARCHAR(45),
+IN _AppointmentTime VARCHAR(45),
+IN _AppointmentDate VARCHAR(45),
+IN _Services VARCHAR(45)
+)
+BEGIN
+	IF _AppointmentID = 0 THEN
+		INSERT INTO book_appts(AppointmentTicketNo, FullName, PhoneNo, Doctor, AppointmentTime, AppointmentDate, Services)
+        VALUES(_AppointmentTicketNo, _FullName, _PhoneNo, _Doctor, _AppointmentTime, _AppointmentDate, _Services);
+	ELSE
+		UPDATE book_appts
+        SET AppointmentTicketNo = _AppointmentTicketNo, 
+        FullName = _FullName, 
+        PhoneNo = _PhoneNo, 
+        Doctor =  _Doctor, 
+        AppointmentTime = _AppointmentTime, 
+        AppointmentDate = _AppointmentDate,
+        Services = _Services
+        WHERE AppointmentID = _AppointmentID;
+	END IF;
+    
+    SELECT ROW_COUNT() AS 'affectedRows';
+
+END

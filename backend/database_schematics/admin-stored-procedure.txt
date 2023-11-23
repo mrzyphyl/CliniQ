@@ -1,0 +1,20 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `usp_admin_add_or_edit`(
+IN _AdminID INT,
+IN _AdminName VARCHAR(16),
+IN _AdminEmail VARCHAR(45),
+IN _AdminPassword VARCHAR(255)
+)
+BEGIN
+	IF _AdminID = 0 THEN
+		INSERT INTO admin (AdminName, AdminEmail, AdminPassword)
+        VALUES(_AdminName, _AdminEmail, _AdminPassword);
+	ELSE
+		UPDATE admin
+        SET UserFName =_AdminName, 
+        AdminEmail = _AdminEmail, 
+        AdminPassword = _AdminPassword
+        WHERE AdminID = _AdminID;
+	END IF;
+    
+    SELECT ROW_COUNT() AS 'affectedRows';
+END

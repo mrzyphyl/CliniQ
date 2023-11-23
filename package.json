@@ -1,0 +1,23 @@
+{
+  "name": "cliniq",
+  "version": "1.0.0",
+  "description": "CliniQ app is a system for queueing in order to manage long queue time and strive for time efficiency",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js",
+    "client": "npm start --prefix cliniq-webapp",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "Job Gian Dispo",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.1",
+    "nodemon": "^3.0.1"
+  },
+  "dependencies": {
+    "qrcode.react": "^3.1.0",
+    "react-calendar": "^4.6.0",
+    "react-qr-code": "^2.0.12"
+  }
+}

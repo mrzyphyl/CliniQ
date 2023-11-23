@@ -1,0 +1,26 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `usp_user_add_or_edit`(
+IN _UserID INT,
+IN _UserFName VARCHAR(45),
+IN _UserLName VARCHAR(45),
+IN _Birthday DATE,
+IN _Age INT,
+IN _UserEmail VARCHAR(45),
+IN _UserPassword VARCHAR(255)
+)
+BEGIN
+	IF _UserID = 0 THEN
+		INSERT INTO users(UserFName, UserLName, Birthday, Age, UserEmail, UserPassword)
+        VALUES(_UserFName, _UserLName, _Birthday, _Age, _UserEmail, _UserPassword);
+	ELSE
+		UPDATE users
+        SET UserFName =_UserFName, 
+        UserLName = _UserLName, 
+        Birthday = _Birthday, 
+        Age = _Age, 
+        UserEmail = _UserEmail, 
+        UserPassword = _UserPassword
+        WHERE UserID = _UserID;
+	END IF;
+    
+    SELECT ROW_COUNT() AS 'affectedRows';
+END
